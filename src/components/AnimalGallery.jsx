@@ -1,59 +1,60 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { FaDog, FaCat, FaFeather, FaChevronLeft, FaChevronRight, FaHeart } from 'react-icons/fa';
-import { GiCow, GiSniffingDog } from 'react-icons/gi';
+import { FaChevronLeft, FaChevronRight, FaHeart } from 'react-icons/fa';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+// Import generated animal images
+import dogImg from '../assets/animal_dog.png';
+import catImg from '../assets/animal_cat.png';
+import cowImg from '../assets/animal_cow.png';
+import birdImg from '../assets/animal_bird.png';
+import squirrelImg from '../assets/animal_squirrel.png';
+
 export default function AnimalGallery() {
   const animals = [
     {
       name: "Street Dogs",
-      icon: FaDog,
+      image: dogImg,
       count: "350+ Fed Daily",
       tag: "Dogs",
       description: "Our canine companions are on the frontlines. We manage daily feeding programs, anti-rabies vaccination drives, and wound treatments across various blocks.",
-      color: "from-[#5B3A29] to-[#8B5E3C]",
-      badgeColor: "bg-[#5B3A29]/15 text-[#5B3A29]"
+      accentColor: "#5B3A29"
     },
     {
       name: "Community Cats",
-      icon: FaCat,
+      image: catImg,
       count: "120+ Sterilized",
       tag: "Cats",
-      description: "Cats are highly vulnerable. We support stray kittens, run trap-neuter-return (TNR) initiatives, and locate loving foster/adoption homes.",
-      color: "from-[#8B5E3C] to-[#C89A63]",
-      badgeColor: "bg-[#8B5E3C]/15 text-[#8B5E3C]"
+      description: "Cats are highly vulnerable. We support stray kittens, run trap-neuter-return (TNR) initiatives, and locate loving foster and adoption homes.",
+      accentColor: "#8B5E3C"
     },
     {
       name: "Stray Cows",
-      icon: GiCow,
+      image: cowImg,
       count: "80+ Rescued & Fed",
       tag: "Cows",
       description: "Many cows ingest plastic or are injured in road accidents. We supply clean green fodder and organize medical rescue runs with veterinary ambulances.",
-      color: "from-[#708B7D] to-[#8B5E3C]",
-      badgeColor: "bg-[#708B7D]/15 text-[#708B7D]"
+      accentColor: "#708B7D"
     },
     {
       name: "Injured Birds",
-      icon: FaFeather,
+      image: birdImg,
       count: "100+ Recovered",
       tag: "Birds",
       description: "Birds suffer during severe heatwaves and due to kite strings. We install water bowls in neighborhoods and host healing shelters for injured birds.",
-      color: "from-[#C89A63] to-[#708B7D]",
-      badgeColor: "bg-[#C89A63]/15 text-[#C89A63]"
+      accentColor: "#C89A63"
     },
     {
-      name: "Street Animals",
-      icon: GiSniffingDog,
+      name: "Small Animals",
+      image: squirrelImg,
       count: "50+ Squirrels & Others",
       tag: "Squirrels & Others",
       description: "Every life matters. We rescue small animals like squirrels, rabbits, and community creatures experiencing injuries or extreme dehydration.",
-      color: "from-[#5B3A29] to-[#708B7D]",
-      badgeColor: "bg-[#5B3A29]/15 text-[#5B3A29]"
+      accentColor: "#5B3A29"
     }
   ];
 
@@ -72,7 +73,7 @@ export default function AnimalGallery() {
               Who We Nourish & Protect
             </h2>
             <p className="max-w-2xl text-primary-brown/85 font-sans">
-              Every day we serve the voiceless animals of our community. From medical attention to nutritious meals, our target is safe, healthy, and happy animals.
+              Every day we serve the voiceless animals of our community. From medical attention to nutritious meals, our mission is safe, healthy, and happy animals.
             </p>
           </div>
 
@@ -91,7 +92,7 @@ export default function AnimalGallery() {
         <div className="relative">
           <Swiper
             modules={[Autoplay, Pagination, Navigation]}
-            spaceBetween={30}
+            spaceBetween={28}
             slidesPerView={1}
             autoplay={{
               delay: 4000,
@@ -106,62 +107,62 @@ export default function AnimalGallery() {
               prevEl: '.swiper-nav-prev',
             }}
             breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
             }}
             className="pb-14"
           >
-            {animals.map((animal, index) => {
-              const IconComp = animal.icon;
-              return (
-                <SwiperSlide key={index}>
-                  <div className="bg-cream rounded-3xl overflow-hidden shadow-lg border border-beige/40 flex flex-col h-full group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            {animals.map((animal, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-cream rounded-3xl overflow-hidden shadow-lg border border-beige/40 flex flex-col h-full group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                  
+                  {/* Photo Block */}
+                  <div className="relative overflow-hidden" style={{ height: '220px' }}>
+                    <img
+                      src={animal.image}
+                      alt={animal.name}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Subtle dark gradient overlay at bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     
-                    {/* Header Image/Gradient Block */}
-                    <div className={`h-48 bg-gradient-to-br ${animal.color} relative flex items-center justify-center text-cream overflow-hidden`}>
-                      {/* Background texture decor */}
-                      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                      
-                      <div className="transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 z-10">
-                        <IconComp className="text-8xl text-cream/90 filter drop-shadow-lg" />
-                      </div>
-                      
-                      <span className="absolute bottom-4 left-4 font-serif text-sm font-semibold tracking-wider text-cream/90 bg-primary-brown/45 backdrop-blur-sm px-3.5 py-1 rounded-full uppercase">
-                        {animal.tag}
-                      </span>
-                    </div>
+                    {/* Tag badge on image */}
+                    <span
+                      className="absolute bottom-4 left-4 font-serif text-xs font-bold tracking-wider text-cream bg-black/40 backdrop-blur-sm px-3.5 py-1.5 rounded-full uppercase"
+                    >
+                      {animal.tag}
+                    </span>
 
-                    {/* Content Block */}
-                    <div className="p-6 flex-grow flex flex-col justify-between">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-2xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors duration-200">
-                            {animal.name}
-                          </h3>
-                          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${animal.badgeColor}`}>
-                            {animal.count}
-                          </span>
-                        </div>
-                        <p className="text-primary-brown/80 font-sans text-sm md:text-base leading-relaxed">
-                          {animal.description}
-                        </p>
-                      </div>
-
-                      {/* Small Footer/CTA inside Card */}
-                      <div className="pt-6 mt-6 border-t border-beige/40 flex items-center justify-between">
-                        <span className="text-xs text-primary-brown/50 font-sans">Helping them coexist</span>
-                        <span className="text-xs font-bold text-accent-gold uppercase tracking-wider group-hover:underline">Learn More →</span>
-                      </div>
-                    </div>
-
+                    {/* Count badge */}
+                    <span
+                      className="absolute top-4 right-4 text-xs font-bold text-cream rounded-full px-3 py-1"
+                      style={{ backgroundColor: animal.accentColor + 'cc' }}
+                    >
+                      {animal.count}
+                    </span>
                   </div>
-                </SwiperSlide>
-              );
-            })}
+
+                  {/* Content Block */}
+                  <div className="p-6 flex-grow flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors duration-200">
+                        {animal.name}
+                      </h3>
+                      <p className="text-primary-brown/80 font-sans text-sm leading-relaxed">
+                        {animal.description}
+                      </p>
+                    </div>
+
+                    {/* Card Footer */}
+                    <div className="pt-5 mt-5 border-t border-beige/40 flex items-center justify-between">
+                      <span className="text-xs text-primary-brown/50 font-sans">Helping them coexist</span>
+                      <span className="text-xs font-bold text-accent-gold uppercase tracking-wider group-hover:underline">Learn More →</span>
+                    </div>
+                  </div>
+
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
 
           {/* Custom Pagination Indicator */}

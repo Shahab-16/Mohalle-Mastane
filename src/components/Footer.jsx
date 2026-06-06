@@ -1,9 +1,12 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaPaw, FaInstagram, FaFacebookF, FaYoutube, FaLinkedinIn, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaInstagram, FaFacebookF, FaYoutube, FaPaw, FaArrowRight } from 'react-icons/fa';
+import { useState } from 'react';
+import LogoImg from '../assets/Logo.png';
 
 export default function Footer() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
   const handleLinkClick = (e, href) => {
     if (href === '/') {
@@ -30,38 +33,45 @@ export default function Footer() {
     }
   };
 
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    setEmail('');
+  };
+
   return (
-    <footer className="bg-[#2C1B11] text-cream border-t border-[#463023]">
-      {/* Top Footer Section */}
+    <footer className="bg-[#1C110A] text-cream relative overflow-hidden">
+      {/* Main Footer Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
           
-          {/* Column 1: Brand details */}
-          <div className="md:col-span-5 space-y-6">
+          {/* Column 1: Brand & Logo */}
+          <div className="md:col-span-4 space-y-5">
             <Link 
               to="/" 
               onClick={(e) => handleLinkClick(e, '/')}
-              className="flex items-center gap-2 group focus:outline-none"
+              className="flex items-center gap-3 group focus:outline-none"
             >
-              <div className="w-10 h-10 rounded-full bg-cream flex items-center justify-center text-primary-brown shadow-md group-hover:scale-105 transition-transform duration-300">
-                <FaPaw className="text-xl text-[#5B3A29]" />
+              <img 
+                src={LogoImg} 
+                alt="Mohalle Mastane Logo" 
+                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="flex flex-col text-left">
+                <span className="font-serif text-lg font-bold tracking-wider text-cream leading-tight">
+                  MOHALLE MASTANE
+                </span>
+                <span className="text-[8px] font-sans font-semibold tracking-widest text-accent-gold">
+                  COEXISTENCE • COMPASSION • TOGETHERNESS
+                </span>
               </div>
-              <span className="font-serif text-2xl font-bold tracking-tight text-cream group-hover:text-accent-gold transition-colors duration-300">
-                Mohalle <span className="text-accent-gold">Mastane</span>
-              </span>
             </Link>
             
-            <p className="font-sans text-sm md:text-base text-cream/70 max-w-sm leading-relaxed">
-              Mohalle Mastane is a registered community NGO. We are committed to fostering deep empathy, caring for stray creatures, and encouraging peaceful coexistence in our neighborhoods.
-            </p>
-
             {/* Social Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pt-2">
               {[
-                { icon: FaInstagram, url: "https://instagram.com" },
+                { icon: FaInstagram, url: "https://www.instagram.com/mohallemastane?igsh=MW1qMjBzd2g0ZndmNw%3D%3D" },
                 { icon: FaFacebookF, url: "https://facebook.com" },
-                { icon: FaYoutube, url: "https://youtube.com" },
-                { icon: FaLinkedinIn, url: "https://linkedin.com" }
+                { icon: FaYoutube, url: "https://youtube.com" }
               ].map((soc, idx) => {
                 const IconComp = soc.icon;
                 return (
@@ -70,7 +80,7 @@ export default function Footer() {
                     href={soc.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full bg-[#463023] hover:bg-accent-gold text-cream hover:text-primary-brown flex items-center justify-center shadow-md transition-all duration-300"
+                    className="w-10 h-10 rounded-full bg-[#2E1C12] hover:bg-accent-gold text-cream/70 hover:text-primary-brown flex items-center justify-center shadow-md transition-all duration-300"
                   >
                     <IconComp className="text-sm" />
                   </a>
@@ -80,31 +90,32 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="md:col-span-3 space-y-6">
-            <h3 className="font-serif text-lg font-bold text-accent-gold uppercase tracking-wider">
+          <div className="md:col-span-2 space-y-5">
+            <h3 className="font-serif text-base font-bold text-accent-gold uppercase tracking-wider">
               Quick Links
             </h3>
-            <ul className="space-y-3 font-sans text-sm md:text-base">
+            <ul className="space-y-2.5 font-sans text-sm">
               {[
-                { name: "About", href: "/#about" },
-                { name: "Animals We Care For", href: "/#animals" },
-                { name: "Events & Drives", href: "/#events" },
-                { name: "Become a Volunteer", href: "/#volunteer" },
-                { name: "Donate Now", href: "/donate" }
+                { name: "Home", href: "/" },
+                { name: "About Us", href: "/#about" },
+                { name: "Animals", href: "/#animals" },
+                { name: "Events", href: "/#events" },
+                { name: "Volunteers", href: "/#volunteer" },
+                { name: "Donate", href: "/donate" }
               ].map((link, idx) => (
                 <li key={idx}>
                   {link.href.startsWith('/#') || link.href === '/' ? (
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className="text-cream/70 hover:text-accent-gold hover:translate-x-1 inline-block transition-all duration-200"
+                      className="text-cream/60 hover:text-accent-gold hover:translate-x-1 inline-block transition-all duration-200"
                     >
                       {link.name}
                     </a>
                   ) : (
                     <Link
                       to={link.href}
-                      className="text-cream/70 hover:text-accent-gold hover:translate-x-1 inline-block transition-all duration-200"
+                      className="text-cream/60 hover:text-accent-gold hover:translate-x-1 inline-block transition-all duration-200"
                     >
                       {link.name}
                     </Link>
@@ -114,43 +125,62 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact details */}
-          <div className="md:col-span-4 space-y-6">
-            <h3 className="font-serif text-lg font-bold text-accent-gold uppercase tracking-wider">
-              Contact Us
+          {/* Column 3: Get Involved */}
+          <div className="md:col-span-2 space-y-5">
+            <h3 className="font-serif text-base font-bold text-accent-gold uppercase tracking-wider">
+              Get Involved
             </h3>
-            <ul className="space-y-4 font-sans text-sm md:text-base text-cream/70">
-              <li className="flex items-start gap-3">
-                <FaEnvelope className="text-accent-gold mt-1 flex-shrink-0" />
-                <a href="mailto:info@mohallemastane.org" className="hover:text-accent-gold transition-colors duration-200 break-all">
-                  info@mohallemastane.org
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <FaPhoneAlt className="text-accent-gold mt-1 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-accent-gold transition-colors duration-200">
-                  +91 98765 43210
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-accent-gold mt-1 flex-shrink-0" />
-                <span>
-                  Mohalle Mastane Welfare Shelter, <br />
-                  Sector 15, New Delhi, India
-                </span>
-              </li>
+            <ul className="space-y-2.5 font-sans text-sm">
+              {[
+                "Volunteer",
+                "Share Your Story",
+                "Community Groups",
+                "Adoption"
+              ].map((item, idx) => (
+                <li key={idx}>
+                  <span className="text-cream/60 hover:text-accent-gold hover:translate-x-1 inline-block transition-all duration-200 cursor-pointer">
+                    {item}
+                  </span>
+                </li>
+              ))}
             </ul>
+          </div>
+
+          {/* Column 4: Stay Connected */}
+          <div className="md:col-span-4 space-y-5">
+            <h3 className="font-serif text-base font-bold text-accent-gold uppercase tracking-wider">
+              Stay Connected
+            </h3>
+            <p className="font-sans text-sm text-cream/60 leading-relaxed">
+              Join our community of compassion and receive updates on our efforts.
+            </p>
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                required
+                className="flex-1 px-4 py-2.5 bg-[#2E1C12] border border-[#443024] rounded-xl text-cream text-sm placeholder-cream/30 focus:outline-none focus:border-accent-gold transition-colors duration-200"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2.5 bg-accent-gold text-primary-brown hover:bg-cream hover:scale-105 active:scale-95 rounded-xl font-bold shadow-md transition-all duration-300 cursor-pointer"
+              >
+                <FaArrowRight className="text-sm" />
+              </button>
+            </form>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom Footer Section */}
-      <div className="border-t border-[#463023] bg-[#22140C] py-6 font-sans text-xs md:text-sm text-center text-cream/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Bottom Bar */}
+      <div className="border-t border-[#2E1C12] bg-[#140B06] py-5 font-sans text-xs text-center text-cream/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p>© {new Date().getFullYear()} Mohalle Mastane Welfare Foundation. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
-            Designed with <FaPaw className="text-accent-gold animate-bounce" /> for Street Animals.
+            Every Mohalla Can Become A Home for Compassion. <FaPaw className="text-accent-gold" />
           </p>
         </div>
       </div>

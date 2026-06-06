@@ -1,192 +1,138 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { 
-  FaCalendarAlt, 
-  FaMapMarkerAlt, 
-  FaUtensils, 
-  FaSyringe, 
-  FaBullhorn, 
-  FaGraduationCap, 
-  FaFirstAid, 
-  FaChevronLeft, 
-  FaChevronRight 
-} from 'react-icons/fa';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import { motion } from 'framer-motion';
+import { FaChevronRight, FaBullhorn, FaUsers } from 'react-icons/fa';
+import { GiBed, GiWaterDrop, GiBowlOfRice } from 'react-icons/gi';
+import boraBedImg from '../assets/events/bora_bed.png';
+import waterBowlImg from '../assets/events/water_bowl.png';
 
 export default function EventsSection() {
-  const events = [
+  const featuredEvents = [
     {
-      title: "Animal Feeding Drive",
-      description: "Weekly food prep and distribution drive to feed stray dogs, cats, and birds across the locality.",
-      icon: FaUtensils,
-      date: "Sunday, Weekly",
-      location: "Central Mohalla Hub",
-      color: "bg-[#5B3A29] text-cream"
+      title: "Be The Reason They Stay Warm",
+      subtitle: "Bora beds for stray dogs this winter. Be the reason a dog gets warm.",
+      image: boraBedImg,
+      price: "₹40",
+      priceNote: "Can Bring Warmth, Be A Life.",
+      cta: "Support Now"
     },
     {
-      title: "Vaccination Camp",
-      description: "Conducting anti-rabies and multi-disease vaccinations for stray puppies and dogs.",
-      icon: FaSyringe,
-      date: "June 14, 2026",
-      location: "Sector 4 Civic Center",
-      color: "bg-[#8B5E3C] text-cream"
-    },
-    {
-      title: "Adoption Awareness",
-      description: "Meet-and-greet with rescued puppies and cats, advocating for 'Don't Shop, Adopt' campaign.",
-      icon: FaBullhorn,
-      date: "June 28, 2026",
-      location: "Greenwood Society Park",
-      color: "bg-[#C89A63] text-cream"
-    },
-    {
-      title: "Community Rescue Workshop",
-      description: "First-aid training for community members on dealing with injured birds and dehydration in stray animals.",
-      icon: FaGraduationCap,
-      date: "July 05, 2026",
-      location: "Mohalle Mastane Center",
-      color: "bg-[#708B7D] text-cream"
-    },
-    {
-      title: "Street Animal Medical Camp",
-      description: "Vets on wheels diagnosing skin infections, deworming, and treating minor street wounds.",
-      icon: FaFirstAid,
-      date: "July 19, 2026",
-      location: "Old Town Market Area",
-      color: "bg-[#5B3A29] text-cream"
+      title: "Water Bowl Campaign",
+      subtitle: "Keep water bowls outside your homes. Fresh water saves stray lives daily.",
+      image: waterBowlImg,
+      price: null,
+      priceNote: null,
+      cta: "Join The Movement"
     }
+  ];
+
+  const quickLinks = [
+    { icon: GiBed, label: "Bora Bed Initiative" },
+    { icon: GiWaterDrop, label: "Water Bowl Campaign" },
+    { icon: GiBowlOfRice, label: "Feeding Drives" },
+    { icon: FaBullhorn, label: "Awareness Events" },
+    { icon: FaUsers, label: "Community Meetups" }
   ];
 
   return (
     <section id="events" className="py-20 bg-cream relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-1/3 left-0 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted-teal/10 text-muted-teal rounded-full text-sm font-semibold">
-              <FaCalendarAlt />
-              Events & Drives
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12"
+        >
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-brown/8 border border-primary-brown/15 rounded-full text-sm font-semibold text-primary-brown">
+              ✦ Events & Initiatives ✦
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary-brown">
-              Events & Community Activities
-            </h2>
-            <p className="max-w-2xl text-primary-brown/85 font-sans">
-              Be a part of our ground-level activities. We regularly host drives, workshops, and treatment camps to bring the community together for animal welfare.
-            </p>
           </div>
-
-          {/* Slider controls */}
-          <div className="flex items-center gap-3 mt-6 md:mt-0">
-            <button className="swiper-event-prev w-12 h-12 rounded-full border-2 border-primary-brown hover:bg-primary-brown hover:text-cream text-primary-brown flex items-center justify-center transition-all duration-300 shadow-md">
-              <FaChevronLeft />
-            </button>
-            <button className="swiper-event-next w-12 h-12 rounded-full border-2 border-primary-brown hover:bg-primary-brown hover:text-cream text-primary-brown flex items-center justify-center transition-all duration-300 shadow-md">
-              <FaChevronRight />
-            </button>
-          </div>
-        </div>
-
-        {/* Swiper Slider */}
-        <div className="relative">
-          <Swiper
-            modules={[Autoplay, Pagination, Navigation]}
-            spaceBetween={30}
-            slidesPerView={1}
-            autoplay={{
-              delay: 4500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-              el: '.swiper-events-pagination',
-            }}
-            navigation={{
-              nextEl: '.swiper-event-next',
-              prevEl: '.swiper-event-prev',
-            }}
-            breakpoints={{
-              768: {
-                slidesPerView: 2,
-              },
-              1200: {
-                slidesPerView: 3,
-              },
-            }}
-            className="pb-14"
+          <a 
+            href="#" 
+            className="text-sm font-semibold text-accent-gold hover:text-light-brown flex items-center gap-1 mt-4 md:mt-0 transition-colors cursor-pointer"
           >
-            {events.map((event, index) => {
-              const IconComp = event.icon;
-              return (
-                <SwiperSlide key={index}>
-                  <div className="bg-beige/20 border border-beige/40 rounded-3xl p-8 flex flex-col justify-between h-[360px] group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                    
-                    {/* Header */}
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className={`w-14 h-14 rounded-2xl ${event.color} flex items-center justify-center text-2xl shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                          <IconComp />
-                        </div>
-                        <span className="text-xs font-semibold px-3 py-1 bg-cream rounded-full border border-beige/60 text-primary-brown">
-                          Active Event
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-2xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors duration-200">
-                        {event.title}
-                      </h3>
-                      
-                      <p className="text-primary-brown/85 font-sans text-sm md:text-base leading-relaxed line-clamp-3">
-                        {event.description}
-                      </p>
+            See All Events <FaChevronRight className="text-[9px]" />
+          </a>
+        </motion.div>
+
+        {/* Featured Events Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+          {featuredEvents.map((event, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.2 }}
+              className="bg-white rounded-3xl border border-beige/60 shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+            >
+              {/* Image Section */}
+              <div className="h-64 sm:h-72 overflow-hidden relative">
+                <img 
+                  src={event.image} 
+                  alt={event.title}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Text & Action Section */}
+              <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between">
+                <div className="space-y-3">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors duration-200 leading-snug">
+                    {event.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-primary-brown/80 font-sans leading-relaxed">
+                    {event.subtitle}
+                  </p>
+                </div>
+
+                <div className="pt-6 space-y-4">
+                  {event.price && (
+                    <div className="flex items-center gap-3 bg-light-brown/10 rounded-xl px-4 py-2.5">
+                      <span className="text-2xl font-serif font-bold text-light-brown">{event.price}</span>
+                      <span className="text-xs font-sans text-primary-brown/70">{event.priceNote}</span>
                     </div>
+                  )}
 
-                    {/* Metadata Footer */}
-                    <div className="space-y-3 pt-6 border-t border-beige/40">
-                      <div className="flex items-center gap-2 text-xs md:text-sm text-primary-brown/70">
-                        <FaCalendarAlt className="text-accent-gold" />
-                        <span className="font-semibold">{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs md:text-sm text-primary-brown/70">
-                        <FaMapMarkerAlt className="text-muted-teal" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-
-          {/* Pagination */}
-          <div className="swiper-events-pagination flex justify-center items-center gap-2 mt-4"></div>
+                  <button className="w-full py-3 px-6 bg-light-brown hover:bg-primary-brown text-cream hover:text-white font-bold rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer text-sm sm:text-base group/btn">
+                    <span>{event.cta}</span>
+                    <FaChevronRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Quick Link Badges */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          {quickLinks.map((link, idx) => {
+            const IconComp = link.icon;
+            return (
+              <button
+                key={idx}
+                className="flex flex-col items-center gap-2 px-5 py-4 bg-white border border-beige/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer group min-w-[110px]"
+              >
+                <div className="w-10 h-10 rounded-full bg-light-brown/10 text-light-brown flex items-center justify-center text-xl group-hover:bg-light-brown group-hover:text-cream transition-all duration-300">
+                  <IconComp />
+                </div>
+                <span className="text-[10px] sm:text-xs font-sans font-semibold text-primary-brown/80 text-center leading-tight">
+                  {link.label}
+                </span>
+              </button>
+            );
+          })}
+        </motion.div>
 
       </div>
-
-      <style>{`
-        .swiper-events-pagination .swiper-pagination-bullet {
-          background: #8B5E3C !important;
-          opacity: 0.3;
-          width: 8px;
-          height: 8px;
-          transition: all 0.3s ease;
-        }
-        .swiper-events-pagination .swiper-pagination-bullet-active {
-          opacity: 1;
-          width: 24px;
-          border-radius: 4px;
-          background: #5B3A29 !important;
-        }
-      `}</style>
     </section>
   );
 }
