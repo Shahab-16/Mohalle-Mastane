@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiX } from 'react-icons/hi';
-import { FaPaw, FaHeart, FaUserPlus } from 'react-icons/fa';
+import { FaPaw, FaHeart } from 'react-icons/fa';
 
 export default function VolunteerModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({

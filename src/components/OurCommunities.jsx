@@ -31,37 +31,41 @@ export default function OurCommunities() {
   ];
 
   return (
-    <section id="communities" className="py-20 bg-cream relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="communities" className="py-24 bg-cream relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-brown/8 border border-primary-brown/15 rounded-full text-sm font-semibold text-primary-brown mb-4">
-            ✦ Our Communities ✦
-          </div>
+          <span className="font-sans text-xs font-bold tracking-[0.25em] text-sage uppercase block mb-3">
+            local circles
+          </span>
+          <h2 className="font-serif font-light text-4xl sm:text-5.5xl text-earth tracking-tight">
+            our active communities
+          </h2>
+          <div className="w-16 h-[1px] bg-earth/15 mx-auto mt-6"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Map Illustration */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Map Illustration - Clean and frame borderless */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="lg:col-span-7 relative"
           >
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-beige/60 bg-white p-3">
-              <div className="relative">
+            <div className="rounded-2xl border border-earth/10 bg-light-bg p-2">
+              <div className="relative overflow-hidden rounded-lg">
                 <img 
                   src={communityMap} 
                   alt="Neighborhood Community Map"
-                  className="w-full h-[350px] md:h-[420px] object-cover rounded-2xl"
+                  className="w-full h-[350px] md:h-[420px] object-cover rounded"
                 />
                 {/* Area Labels Overlay */}
                 {areas.map((area, idx) => (
@@ -72,7 +76,7 @@ export default function OurCommunities() {
                     rel="noopener noreferrer"
                     className={`absolute ${area.position} hidden md:block z-20 cursor-pointer`}
                   >
-                    <div className="px-3 py-1.5 bg-light-brown hover:bg-primary-brown text-cream text-[10px] sm:text-xs font-semibold rounded-full shadow-lg hover:shadow-xl whitespace-nowrap animate-float transition-all duration-300" style={{ animationDelay: `${idx * 0.6}s` }}>
+                    <div className="px-3.5 py-1.5 bg-earth hover:bg-light-brown text-cream text-[10px] sm:text-xs font-medium rounded-full shadow-md hover:scale-105 active:scale-95 whitespace-nowrap transition-all duration-300">
                       {area.name}
                     </div>
                   </a>
@@ -83,29 +87,31 @@ export default function OurCommunities() {
 
           {/* Right Content */}
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-8 text-left"
           >
-            <p className="text-base sm:text-lg text-primary-brown/85 font-sans leading-relaxed">
-              Each area has its own heroes, working together for a better tomorrow. Our community network spans across multiple neighborhoods, creating an interconnected ecosystem of care and compassion for street animals.
+            <p className="font-sans text-xs sm:text-sm text-earth/75 font-light leading-relaxed">
+              Each neighborhood operates its own circle of active responders, coordinates local feeds, and manages emergency transport routes. This decentralized effort links together to form a city-wide support ecosystem.
             </p>
 
-            {/* Area List */}
-            <div className="space-y-3">
+            {/* Area List - Clean borderless layout with subtle divider lines */}
+            <div className="border-t border-earth/10">
               {areas.map((area, idx) => (
                 <a 
                   key={idx} 
                   href={area.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 bg-white border border-beige/60 rounded-xl shadow-sm hover:shadow-md hover:border-light-brown/30 transition-all duration-300 cursor-pointer group block"
+                  className="flex items-center justify-between py-4 border-b border-earth/10 hover:text-light-brown group transition-colors duration-200 block"
                 >
-                  <div className="w-3 h-3 rounded-full bg-light-brown group-hover:scale-125 transition-transform duration-300" />
-                  <span className="text-sm font-sans font-semibold text-primary-brown group-hover:text-light-brown transition-colors duration-200">
+                  <span className="font-serif text-lg font-light text-earth group-hover:text-light-brown transition-colors">
                     {area.name}
+                  </span>
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-sage group-hover:text-light-brown transition-colors">
+                    view map →
                   </span>
                 </a>
               ))}
@@ -115,9 +121,9 @@ export default function OurCommunities() {
               href="https://www.google.com/maps/place/Rourkela,+Odisha"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-8 py-3 bg-light-brown text-cream hover:bg-primary-brown hover:scale-105 active:scale-95 font-bold rounded-xl shadow-md transition-all duration-300 cursor-pointer"
+              className="inline-block px-10 py-3.5 border border-earth/25 text-earth hover:bg-earth hover:text-cream hover:border-earth font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300"
             >
-              Explore Your Area
+              explore your area
             </a>
           </motion.div>
         </div>

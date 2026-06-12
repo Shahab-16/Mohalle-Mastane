@@ -96,9 +96,9 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 font-sans text-sm">
               {[
-                { name: "Home", href: "/" },
-                { name: "About Us", href: "/#about" },
-                { name: "Animals", href: "/#animals" },
+                { name: "Vision", href: "/vision" },
+                { name: "Community", href: "/community" },
+                { name: "Fundraising", href: "/fundraising" },
                 { name: "Events", href: "/#events" },
                 { name: "Volunteers", href: "/#volunteer" },
                 { name: "Donate", href: "/donate" }

@@ -32,58 +32,60 @@ export default function RescuerWall() {
   ];
 
   return (
-    <section id="rescuer-wall" className="py-20 bg-cream relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="rescuer-wall" className="py-24 bg-cream relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-12 space-y-4"
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-left space-y-4"
         >
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary-brown leading-tight">
-            Rescuer Stories<br />Community Wall
+          <span className="font-sans text-xs font-bold tracking-[0.25em] text-sage uppercase block">
+            stories from the streets
+          </span>
+          <h2 className="font-serif font-light text-4xl sm:text-5.5xl text-earth leading-tight">
+            rescuers' community wall
           </h2>
-          <p className="text-sm sm:text-base text-primary-brown/70 font-sans max-w-xl">
-            Dedicated to the rescuers who have stood by stray animals and given them love, care, and shelter.
+          <p className="font-sans text-xs sm:text-sm text-earth/70 font-light max-w-xl leading-relaxed">
+            A dedication to the neighbors who open their homes and hearts to feed, heal, and house animals in distress.
           </p>
-          <button className="px-6 py-2.5 bg-light-brown text-cream hover:bg-primary-brown font-semibold rounded-xl shadow-md transition-all duration-300 cursor-pointer text-sm">
+          <button className="inline-block px-8 py-3 border border-earth/25 text-earth hover:bg-earth hover:text-cream hover:border-earth font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer">
             Share Your Story
           </button>
         </motion.div>
 
-        {/* Polaroid-style Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Polaroid-style Grid - refined for a sophisticated, clean print-look */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {rescuers.map((rescuer, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30, rotate: idx % 2 === 0 ? -2 : 2 }}
-              whileInView={{ opacity: 1, y: 0, rotate: idx % 2 === 0 ? -1 : 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              whileHover={{ rotate: 0, scale: 1.03, y: -5 }}
-              className="bg-white rounded-xl p-3 shadow-lg border border-beige/40 cursor-pointer"
+              transition={{ duration: 0.8, delay: idx * 0.15 }}
+              className="bg-light-bg p-4 border border-earth/10 hover:border-earth/25 hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
               {/* Photo */}
-              <div className="h-52 sm:h-56 rounded-lg overflow-hidden mb-3">
+              <div className="h-52 sm:h-56 overflow-hidden bg-earth/5 rounded mb-4">
                 <img 
                   src={rescuer.image} 
                   alt={rescuer.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
                 />
               </div>
               
               {/* Quote */}
-              <div className="px-1 pb-1 space-y-2">
+              <div className="px-1 pb-1 flex-grow flex flex-col justify-between space-y-4 text-left">
                 <div className="flex gap-2">
-                  <FaQuoteLeft className="text-accent-gold/50 text-xs flex-shrink-0 mt-0.5" />
-                  <p className="text-xs sm:text-sm font-sans text-primary-brown/80 leading-relaxed italic">
+                  <FaQuoteLeft className="text-warm text-xs flex-shrink-0 mt-0.5 opacity-60" />
+                  <p className="font-serif italic text-sm text-earth/80 leading-relaxed">
                     {rescuer.quote}
                   </p>
                 </div>
-                <p className="text-[10px] sm:text-xs font-sans font-semibold text-primary-brown/50 text-right">
+                <p className="font-sans text-[10px] font-semibold text-sage uppercase tracking-wider text-right">
                   {rescuer.name}
                 </p>
               </div>
