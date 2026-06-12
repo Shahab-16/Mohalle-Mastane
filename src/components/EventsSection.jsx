@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
-import { FaChevronRight, FaBullhorn, FaUsers } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaChevronRight } from 'react-icons/fa';
 import { GiBed, GiWaterDrop, GiBowlOfRice } from 'react-icons/gi';
+import { FaBullhorn, FaUsers } from 'react-icons/fa';
 import boraBedImg from '../assets/events/bora_bed.png';
 import waterBowlImg from '../assets/events/water_bowl.png';
 
@@ -8,19 +10,23 @@ export default function EventsSection() {
   const featuredEvents = [
     {
       title: "Be The Reason They Stay Warm",
-      subtitle: "Bora beds for stray dogs this winter. Be the reason a dog gets warm.",
+      subtitle: "Bora beds for stray dogs this winter",
+      description: "As temperatures drop, street dogs in Rourkela struggle to find dry, warm spots. We design and distribute insulated jute/bora beds to keep them protected from the damp ground. A small gesture that stands between an animal and severe winter exposure.",
       image: boraBedImg,
       price: "₹40",
-      priceNote: "Can Bring Warmth, Be A Life.",
-      cta: "Support Now"
+      priceNote: "sponsors one insulated jute bed",
+      cta: "Support Now",
+      link: "/donate"
     },
     {
       title: "Water Bowl Campaign",
-      subtitle: "Keep water bowls outside your homes. Fresh water saves stray lives daily.",
+      subtitle: "Hydration routes across the neighborhood",
+      description: "Fresh water is a basic necessity often unavailable on dry city lanes. Through this campaign, we distribute and place clean clay water bowls outside homes and shops, encouraging neighbors to clean and refill them daily. It's a simple, life-saving habit.",
       image: waterBowlImg,
       price: null,
       priceNote: null,
-      cta: "Join The Movement"
+      cta: "Join The Movement",
+      link: "/donate"
     }
   ];
 
@@ -33,101 +39,113 @@ export default function EventsSection() {
   ];
 
   return (
-    <section id="events" className="py-20 bg-cream relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="events" className="py-24 bg-cream relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-12"
+          transition={{ duration: 0.8 }}
+          className="flex flex-col md:flex-row md:items-end justify-between border-b border-earth/10 pb-8 mb-16"
         >
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-brown/8 border border-primary-brown/15 rounded-full text-sm font-semibold text-primary-brown">
-              ✦ Events & Initiatives ✦
-            </div>
+          <div className="text-left space-y-3">
+            <span className="font-sans text-xs font-bold tracking-[0.25em] text-sage uppercase block">
+              events & initiatives
+            </span>
+            <h2 className="font-serif font-light text-4xl sm:text-5xl text-earth tracking-tight">
+              our collective action
+            </h2>
           </div>
-          <a 
-            href="#" 
-            className="text-sm font-semibold text-accent-gold hover:text-light-brown flex items-center gap-1 mt-4 md:mt-0 transition-colors cursor-pointer"
+          <Link 
+            to="/donate" 
+            className="text-xs font-bold uppercase tracking-widest text-warm hover:text-light-brown flex items-center gap-2 mt-4 md:mt-0 transition-colors duration-200"
           >
-            See All Events <FaChevronRight className="text-[9px]" />
-          </a>
+            See All Initiatives <FaChevronRight className="text-[8px]" />
+          </Link>
         </motion.div>
 
-        {/* Featured Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+        {/* Featured Events Layout */}
+        <div className="space-y-24 mb-20">
           {featuredEvents.map((event, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.2 }}
-              className="bg-white rounded-3xl border border-beige/60 shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              className={`flex flex-col lg:flex-row gap-10 lg:gap-16 items-center ${
+                idx % 2 === 1 ? 'lg:flex-row-reverse' : ''
+              }`}
             >
-              {/* Image Section */}
-              <div className="h-64 sm:h-72 overflow-hidden relative">
+              {/* Image Section - Clean, thin frame */}
+              <div className="w-full lg:w-1/2 overflow-hidden border border-earth/10 p-2 bg-light-bg rounded-lg">
                 <img 
                   src={event.image} 
                   alt={event.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-[300px] sm:h-[360px] object-cover rounded"
                 />
               </div>
 
-              {/* Text & Action Section */}
-              <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between">
+              {/* Content Section - Editorial typography focus */}
+              <div className="w-full lg:w-1/2 text-left space-y-6">
                 <div className="space-y-3">
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors duration-200 leading-snug">
+                  <span className="font-serif italic text-sm text-sage tracking-wider block">
+                    {event.subtitle}
+                  </span>
+                  <h3 className="font-serif font-light text-3xl sm:text-4.5xl text-earth leading-tight">
                     {event.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-primary-brown/80 font-sans leading-relaxed">
-                    {event.subtitle}
+                  <p className="font-sans text-xs sm:text-sm text-earth/75 font-light leading-relaxed">
+                    {event.description}
                   </p>
                 </div>
 
-                <div className="pt-6 space-y-4">
+                <div className="pt-4 space-y-4">
                   {event.price && (
-                    <div className="flex items-center gap-3 bg-light-brown/10 rounded-xl px-4 py-2.5">
-                      <span className="text-2xl font-serif font-bold text-light-brown">{event.price}</span>
-                      <span className="text-xs font-sans text-primary-brown/70">{event.priceNote}</span>
+                    <div className="flex items-baseline gap-2 border-b border-earth/10 pb-4">
+                      <span className="font-serif text-3xl font-light text-warm">{event.price}</span>
+                      <span className="font-sans text-[11px] font-medium tracking-wide text-earth/60 uppercase">
+                        — {event.priceNote}
+                      </span>
                     </div>
                   )}
 
-                  <button className="w-full py-3 px-6 bg-light-brown hover:bg-primary-brown text-cream hover:text-white font-bold rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer text-sm sm:text-base group/btn">
+                  <Link
+                    to={event.link}
+                    className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-earth text-cream hover:bg-light-brown transition-all duration-300 font-sans text-xs font-bold uppercase tracking-widest animate-none"
+                  >
                     <span>{event.cta}</span>
-                    <FaChevronRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
-                  </button>
+                    <FaChevronRight className="text-[9px]" />
+                  </Link>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Quick Link Badges */}
+        {/* Quick Link Badges - Clean underline and borderless text link items */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          transition={{ duration: 0.8 }}
+          className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 pt-12 border-t border-earth/10"
         >
           {quickLinks.map((link, idx) => {
             const IconComp = link.icon;
             return (
-              <button
+              <div
                 key={idx}
-                className="flex flex-col items-center gap-2 px-5 py-4 bg-white border border-beige/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer group min-w-[110px]"
+                className="flex items-center gap-3 font-sans text-xs font-semibold uppercase tracking-wider text-earth/70 hover:text-earth cursor-pointer group transition-colors duration-200"
               >
-                <div className="w-10 h-10 rounded-full bg-light-brown/10 text-light-brown flex items-center justify-center text-xl group-hover:bg-light-brown group-hover:text-cream transition-all duration-300">
-                  <IconComp />
-                </div>
-                <span className="text-[10px] sm:text-xs font-sans font-semibold text-primary-brown/80 text-center leading-tight">
+                <IconComp className="text-lg text-sage group-hover:scale-110 transition-transform duration-200" />
+                <span className="relative">
                   {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-earth transition-all duration-300 group-hover:w-full"></span>
                 </span>
-              </button>
+              </div>
             );
           })}
         </motion.div>

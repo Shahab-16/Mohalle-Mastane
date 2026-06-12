@@ -1,129 +1,119 @@
-import { FaCut, FaHeart, FaCheckCircle, FaShieldAlt, FaArrowRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FaHeart, FaArrowRight, FaShieldAlt, FaCheckCircle, FaCut } from 'react-icons/fa';
 
 export default function SterilisationSection() {
   const steps = [
     {
       step: "01",
       title: "Trap",
-      description: "Animals are carefully and humanely trapped using safe, cage-based methods without causing stress or injury."
+      description: "Animals are carefully and humanely captured using stress-free, cage-based methods by trained community handlers."
     },
     {
       step: "02",
       title: "Neuter",
-      description: "A certified veterinarian performs the sterilisation under proper anaesthesia and full surgical care."
+      description: "A licensed veterinarian performs the sterilisation surgery under proper anaesthesia and full clinical care at our partner hospital."
     },
     {
       step: "03",
       title: "Return",
-      description: "Post-recovery, the animals are returned to their home territory — healthier, safer, and population-controlled."
+      description: "Following post-operative recovery and healing, the animals are safely returned to their original street territories."
     },
   ];
 
   const benefits = [
-    { icon: FaShieldAlt, text: "Reduces rabies & disease transmission" },
-    { icon: FaCheckCircle, text: "Controls population humanely & ethically" },
-    { icon: FaHeart, text: "Improves long-term animal health & behaviour" },
-    { icon: FaCut, text: "Prevents unnecessary suffering & litter births" },
+    { icon: FaShieldAlt, text: "Reduces rabies & viral transmission rates" },
+    { icon: FaCheckCircle, text: "Manages stray populations humanely & ethically" },
+    { icon: FaHeart, text: "Improves long-term behavior and territorial safety" },
+    { icon: FaCut, text: "Prevents street puppy mortality and birthing pain" },
   ];
 
   return (
-    <section id="sterilisation" className="py-20 bg-beige/25 relative overflow-hidden">
-      {/* Background decorative paw prints */}
-      <div className="absolute inset-0 opacity-[0.025] pointer-events-none select-none overflow-hidden">
-        <div className="absolute top-10 right-10 text-[200px] text-primary-brown rotate-12">🐾</div>
-        <div className="absolute bottom-10 left-10 text-[150px] text-primary-brown -rotate-12">🐾</div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section id="sterilisation" className="py-24 bg-light-bg relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted-teal/15 text-primary-brown rounded-full text-sm font-semibold border border-muted-teal/25">
-            <FaCut className="text-muted-teal" />
-            Animal Population Management
-          </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary-brown leading-tight">
-            Sterilisation Program
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
+          <span className="font-sans text-xs font-bold tracking-[0.25em] text-sage uppercase block mb-3">
+            population management
+          </span>
+          <h2 className="font-serif font-light text-4xl sm:text-5.5xl text-earth tracking-tight">
+            the sterilisation program
           </h2>
-          <p className="text-primary-brown/75 font-sans leading-relaxed">
-            We follow the internationally recognised <strong>Trap-Neuter-Return (TNR)</strong> method — the most humane and effective approach to managing stray animal populations in our communities.
+          <div className="w-16 h-[1px] bg-earth/15 mx-auto mt-6 mb-6"></div>
+          <p className="font-sans text-xs sm:text-sm text-earth/70 font-light leading-relaxed max-w-2xl mx-auto">
+            We follow the internationally recommended <strong>Trap-Neuter-Return (TNR)</strong> blueprint — the most humane, long-term, and effective approach to stabilizing and securing street animal communities.
           </p>
-        </div>
+        </motion.div>
 
-        {/* TNR Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+        {/* TNR Steps Grid (Minimalist, borderless, typography-focused) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-24">
           {steps.map((s, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="relative bg-cream rounded-3xl p-8 border border-beige/60 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: idx * 0.15 }}
+              className="space-y-4 text-left border-t border-earth/10 pt-6 relative group"
             >
-              {/* Big step number watermark */}
-              <div className="absolute -top-4 -right-2 text-[100px] font-serif font-black text-primary-brown/5 leading-none select-none">
+              <div className="font-serif text-lg italic text-warm/80 font-medium">
                 {s.step}
               </div>
-              
-              <div className="space-y-4 relative">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary-brown text-cream text-lg font-serif font-bold shadow-md">
-                  {s.step}
-                </div>
-                <h3 className="text-xl font-serif font-bold text-primary-brown group-hover:text-accent-gold transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-primary-brown/75 font-sans text-sm leading-relaxed">
-                  {s.description}
-                </p>
-              </div>
-
-              {/* Connector arrow — hidden on last */}
-              {idx < steps.length - 1 && (
-                <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <div className="w-6 h-6 rounded-full bg-accent-gold flex items-center justify-center shadow">
-                    <FaArrowRight className="text-white text-xs" />
-                  </div>
-                </div>
-              )}
-            </div>
+              <h3 className="font-serif text-2.5xl font-light text-earth group-hover:text-light-brown transition-colors duration-200">
+                {s.title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-earth/70 font-light leading-relaxed">
+                {s.description}
+              </p>
+            </motion.div>
           ))}
         </div>
 
-        {/* Benefits & CTA Row */}
-        <div className="bg-primary-brown rounded-3xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* Benefits & CTA Row - Clean editorial grid with thin dividers */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-b border-earth/10 py-16 items-center">
           {/* Benefits list */}
-          <div className="space-y-5">
-            <h3 className="text-2xl font-serif font-bold text-cream">
-              Why Sterilisation Matters
+          <div className="lg:col-span-6 space-y-6 text-left">
+            <h3 className="font-serif font-light text-3xl text-earth">
+              Why sterilisation matters
             </h3>
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
               {benefits.map(({ icon: Icon, text }, idx) => (
-                <li key={idx} className="flex items-center gap-4">
-                  <div className="w-9 h-9 rounded-full bg-cream/10 text-accent-gold flex items-center justify-center flex-shrink-0">
-                    <Icon />
+                <li key={idx} className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full border border-earth/10 text-sage flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon className="text-xs" />
                   </div>
-                  <span className="font-sans text-sm text-cream/85">{text}</span>
+                  <span className="font-sans text-xs sm:text-sm text-earth/75 font-light leading-relaxed">{text}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* CTA */}
-          <div className="bg-cream/10 border border-cream/20 rounded-2xl p-8 flex flex-col items-center text-center gap-5">
-            <div className="w-14 h-14 rounded-full bg-accent-gold/20 border border-accent-gold/30 flex items-center justify-center text-accent-gold text-2xl">
-              <FaHeart />
-            </div>
+          {/* Vertical divider on large screens */}
+          <div className="hidden lg:block lg:col-span-1 h-32 w-[1px] bg-earth/10 mx-auto"></div>
+
+          {/* CTA Box */}
+          <div className="lg:col-span-5 flex flex-col items-start text-left gap-5">
+            <span className="font-sans text-[10px] font-bold tracking-[0.2em] text-warm uppercase block">
+              sponsor support
+            </span>
             <div className="space-y-2">
-              <h4 className="text-xl font-serif font-bold text-cream">Support Our TNR Program</h4>
-              <p className="text-cream/70 font-sans text-sm leading-relaxed">
-                ₹500 covers the full sterilisation cost for one animal — a permanent, compassionate solution.
+              <h4 className="font-serif text-2.5xl font-light text-earth">Sponsor a TNR procedure</h4>
+              <p className="font-sans text-xs sm:text-sm text-earth/70 font-light leading-relaxed">
+                ₹500 covers the complete clinical surgery, vaccination, and recovery support for one street animal.
               </p>
             </div>
             <Link
               to="/donate"
-              id="sterilisation-donate-cta"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent-gold hover:bg-[#d4a857] text-primary-brown font-bold rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-earth hover:text-light-brown transition-colors duration-200 border-b border-earth pb-1"
             >
-              Sponsor a Sterilisation
-              <FaArrowRight className="text-sm" />
+              Sponsor sterilisation <FaArrowRight className="text-[9px]" />
             </Link>
           </div>
         </div>
